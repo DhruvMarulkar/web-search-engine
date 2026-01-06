@@ -1,0 +1,19 @@
+1. Crawler
+   - Crawls websites using sitemaps
+   - Extracts page title, content, and URL
+
+2. Indexer
+   - Indexes crawled pages into Elasticsearch
+   - Uses BM25 for keyword ranking
+
+3. Semantic Processor
+   - Generates embeddings using Sentence-Transformers
+   - Stores vectors in Elasticsearch
+
+4. Backend API
+   - FastAPI-based search service
+   - Automatically selects keyword or hybrid search
+
+5. Frontend
+   - Simple UI to query search engine
+   - Displays ranked results with highlights

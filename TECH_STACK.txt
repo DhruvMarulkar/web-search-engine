@@ -1,0 +1,22 @@
+Language:
+- Python
+
+Crawling:
+- Scrapy
+
+Search & Indexing:
+- Elasticsearch (BM25 ranking)
+
+Semantic Search:
+- Sentence-Transformers (all-MiniLM-L6-v2)
+
+Backend:
+- FastAPI
+
+Frontend:
+- HTML
+- JavaScript
+
+Others:
+- REST APIs
+- JSON-based data flow

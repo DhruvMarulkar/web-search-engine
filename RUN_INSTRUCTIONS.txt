@@ -1,0 +1,26 @@
+1. Install dependencies
+   pip install -r requirements.txt
+
+2. Start Elasticsearch on localhost:9200
+
+3. Crawl websites
+   cd crawler
+   scrapy crawl sitemap_spider
+
+4. Index pages
+   cd indexer
+   python indexer.py
+
+5. Generate embeddings
+   cd semantic
+   python embed_documents.py
+
+6. Start backend
+   uvicorn backend.api:app --reload
+
+7. Run frontend
+   cd frontend
+   python -m http.server 5500
+
+Open browser:
+http://127.0.0.1:5500

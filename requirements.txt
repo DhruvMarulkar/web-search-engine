@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+elasticsearch
+scrapy
+sentence-transformers
+numpy

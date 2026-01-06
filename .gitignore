@@ -1,0 +1,6 @@
+__pycache__/
+*.log
+.env
+.cache/
+.elastic/
+data/pages.json
