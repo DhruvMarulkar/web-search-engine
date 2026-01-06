@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Search Engine</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        em {
+            background-color: none;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        #results li {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Search Engine</h2>
+
+    <input type="text" id="query" placeholder="Search..." style="width: 300px; padding: 6px;"
+        onkeyup="debounceSearch()" />
+
+    <button onclick="search()">Search</button>
+
+    <ul id="results"></ul>
+
+    <script>
+        let debounceTimer;
+
+        function debounceSearch() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(search, 600);
+        }
+
+        async function search() {
+            const q = document.getElementById("query").value.trim();
+            if (!q) return;
+
+            const list = document.getElementById("results");
+            list.innerHTML = "Searching...";
+
+            try {
+                const response = await fetch(
+                    `http://127.0.0.1:8000/search?q=${encodeURIComponent(q)}`
+                );
+
+                const data = await response.json();
+                list.innerHTML = "";
+
+                if (data.error) {
+                    list.innerHTML = `<li>${data.error}</li>`;
+                    return;
+                }
+
+                if (data.length === 0) {
+                    list.innerHTML = "<li>No results found</li>";
+                    return;
+                }
+
+                data.forEach(item => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                        <a href="${item.url}" target="_blank">
+                            <strong>${item.title}</strong>
+                        </a>
+                        ${item.snippet ? `<p>${item.snippet}</p>` : ""}
+                    `;
+                    list.appendChild(li);
+                });
+
+            } catch (err) {
+                list.innerHTML = "<li>Unable to reach search service</li>";
+            }
+        }
+    </script>
+</body>
+
+</html>
